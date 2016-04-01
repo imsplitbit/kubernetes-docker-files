@@ -1,4 +1,4 @@
 FROM scratch
-MAINTAINER Kelsey Hightower <kelsey.hightower@gmail.com>
+MAINTAINER Daniel Salinas <imsplitbit@gmail.com>
 COPY kubectl kubectl
 ENTRYPOINT ["/kubectl"]

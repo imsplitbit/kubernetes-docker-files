@@ -11,8 +11,16 @@ fi
 
 source ./settings
 
+pushd /tmp
+curl -o kubernetes.tar.gz -L ${KUBERNETES_RELEASE_URL}
+tar -zxvf kubernetes.tar.gz
+pushd kubernetes/server
+tar -zxvf kubernetes-server-linux-amd64.tar.gz
+popd
+popd
+
 for b in kube-apiserver kube-proxy kube-scheduler kube-controller-manager kubelet kubectl; do
-  curl -o ${b}/${b} -L ${KUBERNETES_RELEASE_URL}/${b}
+  cp /tmp/kubernetes/server/kubernetes/server/bin/${b} ${b}/${b}
   chmod +x ${b}/${b}
   pushd ${b}/
   docker build -t ${b}:${KUBERNETES_VERSION} .

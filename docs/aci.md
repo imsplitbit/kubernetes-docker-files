@@ -7,21 +7,21 @@ The docker images produced by these docker files can be converted to ACIs.
 After running the commands in this section you will have the following ACIs:
 
 ```
-kelseyhightower-kube-apiserver-0.19.0.aci
-kelseyhightower-kube-controller-manager-0.19.0.aci
-kelseyhightower-kube-proxy-0.19.0.aci
-kelseyhightower-kube-scheduler-0.19.0.aci
-kelseyhightower-kubelet-0.19.0.aci
+imsplitbit-kube-apiserver-0.19.0.aci
+imsplitbit-kube-controller-manager-0.19.0.aci
+imsplitbit-kube-proxy-0.19.0.aci
+imsplitbit-kube-scheduler-0.19.0.aci
+imsplitbit-kubelet-0.19.0.aci
 ```
 
-### quay.io/kelseyhightower/kubelet:0.19.0
+### quay.io/imsplitbit/kubelet:0.19.0
 
 ```
-docker2aci docker://quay.io/kelseyhightower/kubelet:0.19.0
+docker2aci docker://quay.io/imsplitbit/kubelet:0.19.0
 ```
 
 ```
-docker2aci docker://quay.io/kelseyhightower/kubelet:0.19.0
+docker2aci docker://quay.io/imsplitbit/kubelet:0.19.0
 Downloading c6b09d8961e4: [====================================] 32 B/32 B
 Downloading 57858edd3470: [====================================] 7.92 MB/7.92 MB
 Downloading 312fd182bf0d: [====================================] 32 B/32 B
@@ -41,22 +41,22 @@ Converted volumes:
 	name: "volume-var-lib-kubelet", path: "/var/lib/kubelet", readOnly: false
 
 Generated ACI(s):
-kelseyhightower-kubelet-0.19.0.aci
+imsplitbit-kubelet-0.19.0.aci
 ```
 
 Repeat for the other images:
 
 ```
-docker2aci docker://quay.io/kelseyhightower/kube-apiserver:0.19.0
+docker2aci docker://quay.io/imsplitbit/kube-apiserver:0.19.0
 ```
 ```
-docker2aci docker://quay.io/kelseyhightower/kube-controller-manager:0.19.0
+docker2aci docker://quay.io/imsplitbit/kube-controller-manager:0.19.0
 ```
 ```
-docker2aci docker://quay.io/kelseyhightower/kube-proxy:0.19.0
+docker2aci docker://quay.io/imsplitbit/kube-proxy:0.19.0
 ```
 ```
-docker2aci docker://quay.io/kelseyhightower/kube-scheduler:0.19.0
+docker2aci docker://quay.io/imsplitbit/kube-scheduler:0.19.0
 ```
 
 ## Patch the ACI manifest using actool
@@ -75,15 +75,15 @@ kubelet-0.19.0-linux-amd64.aci
 
 ```
 actool patch-manifest --name=kube-apiserver \
-kelseyhightower-kube-apiserver-0.19.0.aci \
+imsplitbit-kube-apiserver-0.19.0.aci \
 kube-apiserver-0.19.0-linux-amd64.aci
 ```
 
-### kube-controller-manager 
+### kube-controller-manager
 
 ```
 actool patch-manifest --name=kube-controller-manager \
-kelseyhightower-kube-controller-manager-0.19.0.aci \
+imsplitbit-kube-controller-manager-0.19.0.aci \
 kube-controller-manager-0.19.0-linux-amd64.aci
 ```
 
@@ -91,7 +91,7 @@ kube-controller-manager-0.19.0-linux-amd64.aci
 
 ```
 actool patch-manifest --name=kube-proxy --capability=CAP_NET_ADMIN \
-kelseyhightower-kube-proxy-0.19.0.aci \
+imsplitbit-kube-proxy-0.19.0.aci \
 kube-proxy-0.19.0-linux-amd64.aci
 ```
 
@@ -99,7 +99,7 @@ kube-proxy-0.19.0-linux-amd64.aci
 
 ```
 actool patch-manifest --name=kube-scheduler \
-kelseyhightower-kube-scheduler-0.19.0.aci \
+imsplitbit-kube-scheduler-0.19.0.aci \
 kube-scheduler-0.19.0-linux-amd64.aci
 ```
 
@@ -108,7 +108,7 @@ kube-scheduler-0.19.0-linux-amd64.aci
 ```
 actool patch-manifest --name=kubelet --capability=CAP_NET_ADMIN \
 --mounts="volume-resolv-conf,path=/etc/resolv.conf" \
-kelseyhightower-kubelet-0.19.0.aci \
+imsplitbit-kubelet-0.19.0.aci \
 kubelet-0.19.0-linux-amd64.aci
 ```
 
@@ -154,7 +154,7 @@ Added root key at "/etc/rkt/trustedkeys/root.d/cdff0c6aee50d93a5e71a738b6f7807b1
 Start the systemd units:
 
 ```
-git clone https://github.com/kelseyhightower/kubernetes-docker-files.git
+git clone https://github.com/imsplitbit/kubernetes-docker-files.git
 sudo cp kubernetes-docker-files/units/*.service /etc/systemd/system/
 ```
 
@@ -181,9 +181,9 @@ sudo rkt list
 ```
 ```
 UUID		ACI			            STATE	 NETWORKS
-2131936c	kube-proxy		        running	
-2a7aac55	kube-controller-manager	running	
-54c545b8	kube-scheduler		    running	
-7b27fb92	kubelet			        running	
-c712555c	kube-apiserver		    running	
+2131936c	kube-proxy		        running
+2a7aac55	kube-controller-manager	running
+54c545b8	kube-scheduler		    running
+7b27fb92	kubelet			        running
+c712555c	kube-apiserver		    running
 ```

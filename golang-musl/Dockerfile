@@ -1,9 +1,9 @@
 FROM alpine
-MAINTAINER Kelsey Hightower <kelsey.hightower@gmail.com>
+MAINTAINER Daniel Salinas <imsplitbit@gmail.com>
 RUN apk --update add \
     bash \
     bzr \
-    ca-certificates \ 
+    ca-certificates \
     gcc \
     go \
     git \
