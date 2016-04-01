@@ -1,4 +1,4 @@
-FROM kelseyhightower/golang-musl:1.4.2
+FROM quay.io/imsplitbit/golang-musl:1.4.2
 MAINTAINER Daniel Salinas <imsplitbit@gmail.com>
 
 RUN mkdir -p /go/src/github.com/GoogleCloudPlatform/kubernetes

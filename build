@@ -27,3 +27,7 @@ for b in kube-apiserver kube-proxy kube-scheduler kube-controller-manager kubele
   rm ${b}
   popd
 done
+
+pushd /tmp
+rm -rf kubernetes*
+popd
